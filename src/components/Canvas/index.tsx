@@ -1,6 +1,8 @@
+import styles from './styles.module.scss';
+
 export default function Canvas() {
   return (
-    <div>
+    <div className={styles.canvas}>
       Canvas
     </div>
   )
