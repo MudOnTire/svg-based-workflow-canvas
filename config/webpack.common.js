@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/index.ts'),
+  entry: path.resolve(__dirname, '../src/index.tsx'),
   module: {
     rules: [
       {
@@ -12,7 +12,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      src: path.resolve(__dirname, '../src')
+    },
   },
   output: {
     filename: 'flood.js',
