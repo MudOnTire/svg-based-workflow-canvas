@@ -1,0 +1,17 @@
+{
+  "name": "flood",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:MudOnTire/flood.git",
+  "author": "bruce_zhang <bruce_zhang@trendmicro.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "",
+    "build": "tsc",
+    "lint": "",
+    "publish": ""
+  },
+  "devDependencies": {
+    "typescript": "4.5.2"
+  }
+}
