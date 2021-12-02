@@ -1,22 +1,34 @@
 # TS
 
-## Generate a tsconfig.json file
+### Generate a tsconfig.json file
 
 ```
 npx tsc --init
 ```
 
-* webpack (comparisons between webpack, rollup, parcel: https://betterprogramming.pub/the-battle-of-bundlers-6333a4e3eda9)
+### tsconfig.json references
 
-* react
+https://www.typescriptlang.org/tsconfig
 
-* eslint
 
-* prettier
+### about `esModuleInterop` 
 
-* yarn
+https://zhuanlan.zhihu.com/p/148081795
 
-* sass
+# webpack
 
-* jest
+**comparisons between webpack, rollup, parcel**: 
+https://betterprogramming.pub/the-battle-of-bundlers-6333a4e3eda9
+
+# react
+
+# eslint
+
+# prettier
+
+# yarn
+
+# sass
+
+# jest
 
