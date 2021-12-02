@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "sourceMap": true,
     "module": "es6",
     "jsx": "react",
     "outDir": "./dist/",
