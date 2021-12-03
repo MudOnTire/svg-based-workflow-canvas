@@ -22,8 +22,8 @@ export default function CanvasGrid(props: CanvasGridOptions) {
       const length = Math.min(Math.max(2, thickness), size / 2);
       return (
         <rect
-          x={size / 2}
-          y={size / 2}
+          // x={size / 2}
+          // y={size / 2}
           width={length}
           height={length}
           rx={length / 2}
@@ -37,7 +37,7 @@ export default function CanvasGrid(props: CanvasGridOptions) {
 
   return (
     <div className={styles.canvasGrid}>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%">
+      <svg width="100%" height="100%">
         <defs>
           <pattern
             id={CANVAS_GRID_PATTERN_ID}
