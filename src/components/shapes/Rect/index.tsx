@@ -21,7 +21,7 @@ Rect.defaultProps = {
   ry: 0,
   width: 80,
   height: 80,
-  fill: 'rgba(255,255,255,0)',
+  fill: 'rgba(255,255,255,0.3)',
   stroke: '#000',
   strokeWidth: 1
 }
