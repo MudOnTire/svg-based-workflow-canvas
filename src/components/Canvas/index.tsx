@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Rect from 'src/components/shapes/Rect';
+import RectNode from 'src/components/nodes/RectNode';
 
 import styles from './styles.module.scss';
 
@@ -14,7 +14,7 @@ export default function Canvas(props: CanvasOptions) {
     <div className={styles.canvas}>
       <svg width="100%" height="100%">
         {children}
-        <Rect />
+        <RectNode />
       </svg>
     </div>
   )
