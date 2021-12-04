@@ -15,8 +15,8 @@ export default function Rect(props: RectProps) {
 }
 
 Rect.defaultProps = {
-  x: 0,
-  y: 0,
+  x: '50%',
+  y: '50%',
   rx: 0,
   ry: 0,
   width: 80,
