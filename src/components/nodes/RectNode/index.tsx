@@ -1,4 +1,3 @@
-import React from 'react'
 import NodeWrapper from '../NodeWrapper';
 import Rect from 'src/components/shapes/Rect';
 
