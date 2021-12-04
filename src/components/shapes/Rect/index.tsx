@@ -17,11 +17,11 @@ export default function Rect(props: RectProps) {
 Rect.defaultProps = {
   x: '50%',
   y: '50%',
-  rx: 0,
-  ry: 0,
+  rx: 4,
+  ry: 4,
   width: 80,
   height: 80,
   fill: 'rgba(255,255,255,0.3)',
-  stroke: '#000',
-  strokeWidth: 1
+  stroke: '#666',
+  strokeWidth: 2
 }

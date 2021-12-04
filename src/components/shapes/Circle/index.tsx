@@ -16,6 +16,6 @@ Circle.defaultProps = {
   cy: '50%',
   r: 45,
   fill: 'rgba(255,255,255,0.3)',
-  stroke: '#000',
-  strokeWidth: 1
+  stroke: '#666',
+  strokeWidth: 2
 }
