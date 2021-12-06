@@ -15,6 +15,12 @@ function getInitialState() {
         x: 400,
         y: 300
       }
+    ],
+    edges: [
+      {
+        from: '0',
+        to: '1'
+      }
     ]
   }
 }

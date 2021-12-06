@@ -3,7 +3,7 @@ import Transformer from 'src/components/Transformer';
 import { TransformValues } from 'src/store/types';
 import useDrag from 'src/hooks/useDrag';
 import Nodes from 'src/components/Nodes';
-import Linkers from 'src/components/Linkers';
+import Edges from 'src/components/Edges';
 
 import styles from './styles.module.scss';
 
@@ -65,7 +65,7 @@ export default function Canvas(props: CanvasOptions) {
         <Transformer transform={transform}>
           {children}
           <Nodes />
-          <Linkers />
+          <Edges />
         </Transformer>
       </svg>
     </div>
