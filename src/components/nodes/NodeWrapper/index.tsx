@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect, ReactNode } from 'react'
+import { useState, useCallback, useMemo, useEffect, ReactNode, createRef, useRef } from 'react'
 
 import styles from './styles.module.scss';
 
@@ -9,6 +9,8 @@ type NodeWrapperProps = {
 export default function NodeWrapper(props: NodeWrapperProps) {
   // pros
   const { children } = props;
+  // refs
+  const node = useRef(null);
 
   // states
   const [mouseDown, setMouseDown] = useState(false);
@@ -47,13 +49,6 @@ export default function NodeWrapper(props: NodeWrapperProps) {
     });
   }, []);
 
-  const handleMouseUp = () => {
-    setMouseDown(false);
-    setNodeLastPosition({ x: nodePosition.x, y: nodePosition.y });
-    setMouseStartPosition({ x: 0, y: 0 });
-    setMousePosition({ x: 0, y: 0 });
-  }
-
   const handleMouseMove = useCallback((e) => {
     if (!mouseDown) return;
     const { clientX, clientY } = e;
@@ -63,21 +58,36 @@ export default function NodeWrapper(props: NodeWrapperProps) {
     });
   }, [mouseDown]);
 
+  const handleMouseUp = useCallback(() => {
+    if (!node.current) return;
+    const nodeEl = node.current as HTMLElement;
+    const lastNodeX = nodeEl.dataset.x ? parseInt(nodeEl.dataset.x) : 0;
+    const lastNodeY = nodeEl.dataset.y ? parseInt(nodeEl.dataset.y) : 0;
+    setMouseDown(false);
+    setNodeLastPosition({ x: lastNodeX, y: lastNodeY });
+    setMouseStartPosition({ x: 0, y: 0 });
+    setMousePosition({ x: 0, y: 0 });
+  }, [nodePosition]);
+
   // effects
   useEffect(() => {
     if (mouseDown) {
       window.addEventListener('mousemove', handleMouseMove);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseup', handleMouseUp);
+      }
     }
   }, [mouseDown]);
 
   return (
     <g
+      ref={node}
+      data-x={nodePosition.x}
+      data-y={nodePosition.y}
       className={styles.nodeWrapper}
       onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
       style={{
         transform: `translate(${nodePosition.x}px, ${nodePosition.y}px)`
       }}
