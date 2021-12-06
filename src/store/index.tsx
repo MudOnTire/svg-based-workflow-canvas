@@ -1,5 +1,5 @@
 import { useReducer, createContext } from "react";
-import { StoreProviderProps, Action } from './types';
+import { StoreProviderProps, Action, ContextValue } from './types';
 import { actions as nodesActions, getInitialState as getNodesInitialState, reducer as nodesReducer } from './nodes';
 
 const actions = {
@@ -22,8 +22,9 @@ const context = createContext(initialState);
 function StoreProvider(props: StoreProviderProps) {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
+  const value: ContextValue = { state, dispatch };
   return (
-    <context.Provider value={{ state, dispatch }}>
+    <context.Provider value={value}>
       {children}
     </context.Provider>
   );

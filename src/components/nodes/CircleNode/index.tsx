@@ -2,8 +2,9 @@ import { useState } from 'react';
 import NodeWrapper from '../NodeWrapper';
 import Circle from 'src/components/shapes/Circle';
 import Anchor from 'src/components/Anchor';
+import { BaseNodeProps } from '../BaseNode';
 
-export default function CircleNode() {
+export default function CircleNode(props: BaseNodeProps) {
   // state
   const [nodePosition, setNodePosition] = useState({ x: 0, y: 0 });
 

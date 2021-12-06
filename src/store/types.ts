@@ -18,4 +18,16 @@ type TransformValues = {
   translateY: number;
 }
 
-export { StoreProviderProps, Action, TransformValues }
+type ContextValue = {
+  state: any;
+  dispatch: Function;
+}
+
+type Node = {
+  id: string;
+  type: string;
+  linkFrom: string;
+  linkTo: string;
+}
+
+export { StoreProviderProps, Action, TransformValues, ContextValue, Node }

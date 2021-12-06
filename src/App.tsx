@@ -1,11 +1,14 @@
 import Editor from 'src/components/Editor';
+import { StoreProvider } from 'src/store';
 import './app.scss';
 
 function App() {
   return (
-    <div className="App">
-      <Editor />
-    </div>
+    <StoreProvider>
+      <div className="App">
+        <Editor />
+      </div>
+    </StoreProvider>
   );
 }
 

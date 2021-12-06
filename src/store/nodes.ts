@@ -2,7 +2,20 @@ import { Action } from './types';
 
 function getInitialState() {
   return {
-    nodes: []
+    nodes: [
+      {
+        id: '0',
+        type: 'circle',
+        x: 200,
+        y: 200
+      },
+      {
+        id: '1',
+        type: 'rect',
+        x: 200,
+        y: 200
+      }
+    ]
   }
 }
 

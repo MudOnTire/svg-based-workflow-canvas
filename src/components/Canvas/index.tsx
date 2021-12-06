@@ -1,9 +1,9 @@
 import { ReactNode, useMemo, useState, useEffect, useRef } from 'react';
-import RectNode from 'src/components/nodes/RectNode';
-import CircleNode from 'src/components/nodes/CircleNode';
 import Transformer from 'src/components/Transformer';
 import { TransformValues } from 'src/store/types';
 import useDrag from 'src/hooks/useDrag';
+import Nodes from 'src/components/Nodes';
+import Linkers from 'src/components/Linkers';
 
 import styles from './styles.module.scss';
 
@@ -64,8 +64,8 @@ export default function Canvas(props: CanvasOptions) {
       <svg width="100%" height="100%" ref={svgRef}>
         <Transformer transform={transform}>
           {children}
-          <RectNode />
-          <CircleNode />
+          <Nodes />
+          <Linkers />
         </Transformer>
       </svg>
     </div>
