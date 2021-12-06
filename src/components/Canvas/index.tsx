@@ -14,9 +14,11 @@ export default function Canvas(props: CanvasOptions) {
   return (
     <div className={styles.canvas}>
       <svg width="100%" height="100%">
-        {children}
-        <RectNode />
-        <CircleNode />
+        <g className={styles.transformer}>
+          {children}
+          <RectNode />
+          <CircleNode />
+        </g>
       </svg>
     </div>
   )
