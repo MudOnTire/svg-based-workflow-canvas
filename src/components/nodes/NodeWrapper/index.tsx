@@ -60,6 +60,7 @@ export default function NodeWrapper(props: NodeWrapperProps) {
 
   const handleMouseUp = useCallback(() => {
     if (!node.current) return;
+    // lastest nodePosition states won't be fetched, use data-x instead
     const nodeEl = node.current as HTMLElement;
     const lastNodeX = nodeEl.dataset.x ? parseInt(nodeEl.dataset.x) : 0;
     const lastNodeY = nodeEl.dataset.y ? parseInt(nodeEl.dataset.y) : 0;
