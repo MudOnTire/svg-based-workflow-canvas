@@ -1,6 +1,5 @@
-import { useContext, useEffect } from 'react';
-import { context, actions } from "src/store";
-import { ContextValue } from 'src/store/types';
+import { useContext } from 'react';
+import { context } from "src/store";
 import LineEdge from './LineEdge';
 
 type Edge = {
@@ -10,7 +9,7 @@ type Edge = {
 
 export default function Linkers() {
   // store
-  const { state, dispatch } = useContext(context) as ContextValue;
+  const state = useContext(context);
 
   return (
     <>

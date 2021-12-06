@@ -6,7 +6,7 @@ import CircleNode from 'src/components/Nodes/CircleNode';
 
 export default function Nodes() {
   // store
-  const { state, dispatch } = useContext(context) as ContextValue;
+  const state = useContext(context);
 
   return (
     <>

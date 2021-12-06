@@ -18,18 +18,30 @@ type TransformValues = {
   translateY: number;
 }
 
+interface NodesState {
+  nodes: Node[];
+  edges: Edge[];
+}
+
+interface State extends NodesState {
+  dispatch: Function
+}
+
 type ContextValue = {
-  state: any;
+  state: State;
   dispatch: Function;
 }
 
 type Node = {
   id: string;
   type: string;
-  linkFrom: string;
-  linkTo: string;
   x?: number;
   y?: number;
 }
 
-export { StoreProviderProps, Action, TransformValues, ContextValue, Node }
+type Edge = {
+  from: string;
+  to: string;
+}
+
+export { StoreProviderProps, Action, TransformValues, NodesState, State, ContextValue, Node, Edge }

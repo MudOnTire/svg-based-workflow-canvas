@@ -1,18 +1,22 @@
-import { useState, useCallback, useMemo, useEffect, ReactNode, useRef } from 'react'
+import { useState, useCallback, useMemo, useEffect, ReactNode, useRef, useContext } from 'react'
 import useDrag from 'src/hooks/useDrag';
+import { context, actions } from "src/store";
+import { ContextValue } from 'src/store/types'
 
 import styles from './styles.module.scss';
 
 type NodeWrapperProps = {
   children: ReactNode;
+  id: string;
   x?: number;
   y?: number;
-  onNodeMove?: (x: number, y: number) => void;
 }
 
 function NodeWrapper(props: NodeWrapperProps) {
   // pros
-  const { children, x, y, onNodeMove } = props;
+  const { children, x, y } = props;
+  // store
+  const state = useContext(context);
   // ref
   const node = useRef(null);
   // custom hooks
@@ -60,9 +64,6 @@ function NodeWrapper(props: NodeWrapperProps) {
 
   useEffect(() => {
     const { x, y } = nodePosition;
-    if (typeof onNodeMove === 'function') {
-      onNodeMove(x, y);
-    }
   }, [nodePosition.x, nodePosition.y]);
 
   return (

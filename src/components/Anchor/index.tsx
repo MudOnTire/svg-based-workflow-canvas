@@ -7,12 +7,11 @@ import useDrag from 'src/hooks/useDrag';
 import styles from './styles.module.scss';
 
 type AnchorProps = {
-  type: 'in' | 'out',
-  x?: number,
-  y?: number,
-  cx?: number,
-  cy?: number,
-  nodePosition?: { x: number, y: number },
+  type: 'in' | 'out';
+  x?: number;
+  y?: number;
+  cx?: number;
+  cy?: number;
 }
 
 const colors = {

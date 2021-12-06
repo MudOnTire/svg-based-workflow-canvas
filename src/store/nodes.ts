@@ -1,4 +1,4 @@
-import { Action } from './types';
+import { Action, State } from './types';
 
 function getInitialState() {
   return {
@@ -29,17 +29,23 @@ function actionName(name: string) {
   return `NODES_STORE_${name}`;
 }
 
-const SET_NODES = actionName('SET_NODES')
+const SET_NODES = actionName('SET_NODES');
+const UPDATE_NODE = actionName('UPDATE_NODE');
 
 const actions = {
-  SET_NODES
+  SET_NODES,
+  UPDATE_NODE
 }
 
-function reducer(state: Object, action: Action) {
+function reducer(state: State, action: Action) {
   const { type, payload } = action;
   switch (type) {
     case actions.SET_NODES: {
-      return { ...state, transform: payload }
+      return { ...state, nodes: payload }
+    }
+    case actions.UPDATE_NODE: {
+      const { id } = payload;
+      // const node = state?.nodes?.find
     }
     default:
       return;

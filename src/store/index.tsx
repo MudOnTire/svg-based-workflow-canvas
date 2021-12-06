@@ -1,16 +1,17 @@
 import { useReducer, createContext } from "react";
-import { StoreProviderProps, Action, ContextValue } from './types';
+import { StoreProviderProps, Action, State } from './types';
 import { actions as nodesActions, getInitialState as getNodesInitialState, reducer as nodesReducer } from './nodes';
 
 const actions = {
   ...nodesActions
 }
 
-const initialState: Object = {
+const initialState: State = {
+  dispatch: () => { },
   ...getNodesInitialState()
 }
 
-function reducer(state: Object, action: Action): Object {
+function reducer(state: State, action: Action): State {
   let result;
   result = nodesReducer(state, action);
   if (result) return result;
@@ -22,9 +23,9 @@ const context = createContext(initialState);
 function StoreProvider(props: StoreProviderProps) {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value: ContextValue = { state, dispatch };
+  state.dispatch = dispatch;
   return (
-    <context.Provider value={value}>
+    <context.Provider value={state}>
       {children}
     </context.Provider>
   );
