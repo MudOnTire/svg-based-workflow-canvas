@@ -14,13 +14,33 @@ function getInitialState() {
         type: 'rect',
         x: 400,
         y: 300
-      }
+      },
+      {
+        id: '2',
+        type: 'circle',
+        x: 600,
+        y: 300
+      },
+      {
+        id: '3',
+        type: 'circle',
+        x: 600,
+        y: 600
+      },
     ],
     edges: [
       {
         from: '0',
         to: '1'
-      }
+      },
+      {
+        from: '1',
+        to: '2'
+      },
+      {
+        from: '1',
+        to: '3'
+      },
     ]
   }
 }

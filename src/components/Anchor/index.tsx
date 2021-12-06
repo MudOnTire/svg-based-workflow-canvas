@@ -16,7 +16,7 @@ type AnchorProps = {
 }
 
 const colors = {
-  normal: 'rgb(125, 131, 143)'
+  normal: '#666'
 }
 
 export default function Anchor(props: AnchorProps) {
