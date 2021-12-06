@@ -1,6 +1,7 @@
-import { useCallback, useMemo, MutableRefObject, useEffect } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 import Rect from 'src/components/shapes/Rect';
 import Circle from 'src/components/shapes/Circle';
+import useDrag from 'src/hooks/useDrag';
 
 import styles from './styles.module.scss';
 
@@ -20,9 +21,16 @@ const colors = {
 export default function Anchor(props: AnchorProps) {
   // props
   const { type, x, y, cx, cy, nodePosition } = props;
-
+  // custom hook
+  const {
+    mouseDown,
+    mouseDeltaPosition,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp
+  } = useDrag();
   // cached states
-  const coordinates = useMemo(() => {
+  const startCoordinate = useMemo(() => {
     const translateX = nodePosition?.x || 0;
     const translateY = nodePosition?.y || 0;
     if (type === 'in') {
@@ -37,19 +45,45 @@ export default function Anchor(props: AnchorProps) {
         y: translateY + (cy || 0)
       }
     }
+    return {
+      x: 0,
+      y: 0
+    }
   }, [type, x, y, cx, cy, nodePosition]);
 
-  useEffect(() => {
-    console.log("coordinates", coordinates);
-  }, [coordinates]);
+  const endCoordinate = useMemo(() => {
+    return {
+      x: startCoordinate.x + mouseDeltaPosition.x,
+      y: startCoordinate.y + mouseDeltaPosition.y,
+    }
+  }, [startCoordinate, mouseDeltaPosition]);
 
-  // actions
-  const handleMouseDown = useCallback((e) => {
-    e.stopPropagation();
+  useEffect(() => {
+    console.log('endCoordinate', endCoordinate);
+  }, [endCoordinate]);
+
+  // mouse actions
+  const selfHandleMouseUp = useCallback((e) => {
+    handleMouseUp(e);
   }, []);
 
+  // effects
+  useEffect(() => {
+    if (mouseDown) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', selfHandleMouseUp);
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseup', selfHandleMouseUp);
+      }
+    }
+  }, [mouseDown]);
+
   return (
-    <g className={styles.anchor} onMouseDown={handleMouseDown}>
+    <g
+      className={styles.anchor}
+      onMouseDown={handleMouseDown}
+    >
       {
         type === 'in' &&
         <Rect

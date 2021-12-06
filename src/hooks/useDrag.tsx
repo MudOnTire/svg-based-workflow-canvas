@@ -16,6 +16,9 @@ function useDrag() {
   }, [mouseStartPosition, mousePosition]);
 
   // actions
+  /**
+   * mouse down
+   */
   const handleMouseDown = useCallback((e) => {
     e.stopPropagation();
     setMouseDown(true);
@@ -30,6 +33,9 @@ function useDrag() {
     });
   }, []);
 
+  /**
+   * mouse move
+   */
   const handleMouseMove = useCallback((e) => {
     if (!mouseDown) return;
     const { clientX, clientY } = e;
@@ -39,6 +45,9 @@ function useDrag() {
     });
   }, [mouseDown]);
 
+  /**
+   * mouse up
+   */
   const handleMouseUp = useCallback((e) => {
     setMouseDown(false);
   }, []);
