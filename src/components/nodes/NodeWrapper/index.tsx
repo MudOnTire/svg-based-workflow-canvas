@@ -4,13 +4,15 @@ import useDrag from 'src/hooks/useDrag';
 import styles from './styles.module.scss';
 
 type NodeWrapperProps = {
-  children: ReactNode,
-  onNodeMove?: (x: number, y: number) => void
+  children: ReactNode;
+  x?: number;
+  y?: number;
+  onNodeMove?: (x: number, y: number) => void;
 }
 
 function NodeWrapper(props: NodeWrapperProps) {
   // pros
-  const { children, onNodeMove } = props;
+  const { children, x, y, onNodeMove } = props;
   // ref
   const node = useRef(null);
   // custom hooks
@@ -20,16 +22,16 @@ function NodeWrapper(props: NodeWrapperProps) {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp
-  }=useDrag();
+  } = useDrag();
 
   // states
-  const [nodeLastPosition, setNodeLastPosition] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+  const [nodeLastPosition, setNodeLastPosition] = useState({ x, y });
 
   // cached states
   const nodePosition = useMemo(() => {
     return {
-      x: nodeLastPosition.x + mouseDeltaPosition.x,
-      y: nodeLastPosition.y + mouseDeltaPosition.y
+      x: (nodeLastPosition?.x || 0) + mouseDeltaPosition.x,
+      y: (nodeLastPosition?.y || 0) + mouseDeltaPosition.y
     }
   }, [nodeLastPosition, mouseDeltaPosition]);
 
@@ -77,6 +79,13 @@ function NodeWrapper(props: NodeWrapperProps) {
       {children}
     </g>
   )
+}
+
+NodeWrapper.defaultProps = {
+  children: null,
+  x: 0,
+  y: 0,
+  onNodeMove: () => { }
 }
 
 export default NodeWrapper;

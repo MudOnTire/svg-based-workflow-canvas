@@ -5,6 +5,8 @@ import Anchor from 'src/components/Anchor';
 import { BaseNodeProps } from '../BaseNode';
 
 export default function RectNode(props: BaseNodeProps) {
+  // props
+  const { x, y } = props;
   // state
   const [nodePosition, setNodePosition] = useState({ x: 0, y: 0 });
 
@@ -14,7 +16,7 @@ export default function RectNode(props: BaseNodeProps) {
   }
 
   return (
-    <NodeWrapper onNodeMove={handleNodeMove}>
+    <NodeWrapper onNodeMove={handleNodeMove} x={x} y={y}>
       <Rect />
       <Anchor type="in" x={-4} y={30} nodePosition={nodePosition} />
       <Anchor type="out" cx={80} cy={40} nodePosition={nodePosition} />

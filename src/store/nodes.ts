@@ -6,14 +6,14 @@ function getInitialState() {
       {
         id: '0',
         type: 'circle',
-        x: 200,
-        y: 200
+        x: 220,
+        y: 340
       },
       {
         id: '1',
         type: 'rect',
-        x: 200,
-        y: 200
+        x: 400,
+        y: 300
       }
     ]
   }

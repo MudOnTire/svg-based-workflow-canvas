@@ -28,6 +28,8 @@ type Node = {
   type: string;
   linkFrom: string;
   linkTo: string;
+  x?: number;
+  y?: number;
 }
 
 export { StoreProviderProps, Action, TransformValues, ContextValue, Node }

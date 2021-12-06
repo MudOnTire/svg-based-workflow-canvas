@@ -12,12 +12,12 @@ export default function Nodes() {
     <>
       {
         Array.isArray(state?.nodes) && state.nodes.map((node: Node) => {
-          const { id, type } = node;
+          const { id, type, x, y } = node;
           if (type === "circle") {
-            return <CircleNode id={id} key={id} />
+            return <CircleNode id={id} key={id} x={x} y={y} />
           }
           if (type === 'rect') {
-            return <RectNode id={id} key={id} />
+            return <RectNode id={id} key={id} x={x} y={y} />
           }
         })
       }
