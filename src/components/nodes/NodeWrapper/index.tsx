@@ -16,7 +16,7 @@ export default function NodeWrapper(props: NodeWrapperProps) {
   const [mouseDown, setMouseDown] = useState(false);
   const [mouseStartPosition, setMouseStartPosition] = useState({ x: 0, y: 0 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [nodeLastPosition, setNodeLastPosition] = useState({ x: 0, y: 0 });
+  const [nodeLastPosition, setNodeLastPosition] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
 
   // cached states
   const mouseDeltaPosition = useMemo(() => {
@@ -85,6 +85,8 @@ export default function NodeWrapper(props: NodeWrapperProps) {
 
   return (
     <g
+      x='50%'
+      y='50%'
       ref={node}
       data-x={nodePosition.x}
       data-y={nodePosition.y}

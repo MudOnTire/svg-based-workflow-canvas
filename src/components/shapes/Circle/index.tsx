@@ -12,8 +12,6 @@ export default function Circle(props: CricleProps) {
 }
 
 Circle.defaultProps = {
-  cx: '50%',
-  cy: '50%',
   r: 45,
   fill: 'rgba(255,255,255,0.3)',
   stroke: '#666',
