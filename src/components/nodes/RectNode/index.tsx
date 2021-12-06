@@ -7,6 +7,7 @@ export default function RectNode() {
     <NodeWrapper>
       <Rect />
       <Anchor type="in" x={-4} y={30} />
+      <Anchor type="out" cx={80} cy={40} />
     </NodeWrapper>
   )
 }
