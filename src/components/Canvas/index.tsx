@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useMemo, useState, useEffect } from 'react';
 import RectNode from 'src/components/nodes/RectNode';
 import CircleNode from 'src/components/nodes/CircleNode';
-import Transformer from './Transformer';
+import Transformer from 'src/components/Transformer';
 import { TransformValues } from 'src/store/types';
 
 import styles from './styles.module.scss';
@@ -74,7 +74,7 @@ export default function Canvas(props: CanvasOptions) {
 
   return (
     <div
-      className={styles.canvas}
+      className={`${styles.canvas} ${mouseDown ? styles.mouseDown : ''}`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
