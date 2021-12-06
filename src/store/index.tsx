@@ -1,16 +1,20 @@
 import { useReducer, createContext } from "react";
 import { StoreProviderProps, Action } from './types';
+import { actions as nodesActions, getInitialState as getNodesInitialState, reducer as nodesReducer } from './nodes';
 
 const actions = {
-
+  ...nodesActions
 }
 
-const initialState = {
-
+const initialState: Object = {
+  ...getNodesInitialState()
 }
 
 function reducer(state: Object, action: Action): Object {
-  return {}
+  let result;
+  result = nodesReducer(state, action);
+  if (result) return result;
+  return state;
 }
 
 const context = createContext(initialState);
