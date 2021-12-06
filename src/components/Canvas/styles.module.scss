@@ -5,8 +5,9 @@
   right: 0;
   bottom: 0;
   background-color: rgba(154, 230, 240, 0.1);
+  cursor: grab;
 }
 
 .mouseDown {
-  cursor: pointer;
+  cursor: grabbing;
 }

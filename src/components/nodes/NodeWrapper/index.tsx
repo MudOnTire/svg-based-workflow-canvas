@@ -85,12 +85,10 @@ export default function NodeWrapper(props: NodeWrapperProps) {
 
   return (
     <g
-      x='50%'
-      y='50%'
       ref={node}
       data-x={nodePosition.x}
       data-y={nodePosition.y}
-      className={styles.nodeWrapper}
+      className={`${styles.nodeWrapper} ${mouseDown ? styles.mouseDown : ''}`}
       onMouseDown={handleMouseDown}
       style={{
         transform: `translate(${nodePosition.x}px, ${nodePosition.y}px)`

@@ -1,5 +1,7 @@
 import Rect from 'src/components/shapes/Rect';
 
+import styles from './styles.module.scss';
+
 type AnchorProps = {
   type: 'in' | 'out',
   x?: number,
@@ -14,15 +16,17 @@ export default function Anchor(props: AnchorProps) {
     <>
       {
         type === 'in' &&
-        <Rect
-          x={x}
-          y={y}
-          width={8}
-          height={20}
-          rx={0}
-          ry={0}
-          fill='rgb(125, 131, 143)'
-        />
+        <g className={styles.anchor}>
+          <Rect
+            x={x}
+            y={y}
+            width={8}
+            height={20}
+            rx={0}
+            ry={0}
+            fill='rgb(125, 131, 143)'
+          />
+        </g>
       }
 
     </>
