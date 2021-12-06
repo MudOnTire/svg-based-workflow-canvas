@@ -3,6 +3,7 @@ import Rect from 'src/components/shapes/Rect';
 import Circle from 'src/components/shapes/Circle';
 import Line from 'src/components/shapes/Line';
 import useDrag from 'src/hooks/useDrag';
+import { IN_ANCHOR_SIZE, OUT_ANCHOR_SIZE } from 'src/utils/constants';
 
 import styles from './styles.module.scss';
 
@@ -33,8 +34,8 @@ export default function Anchor(props: AnchorProps) {
   const startCoordinate = useMemo(() => {
     if (type === 'in') {
       return {
-        x: typeof x === 'number' ? x + 4 : 0,
-        y: typeof y === 'number' ? y + 10 : 0,
+        x: typeof x === 'number' ? x + IN_ANCHOR_SIZE.width / 2 : 0,
+        y: typeof y === 'number' ? y + IN_ANCHOR_SIZE.height / 2 : 0,
       }
     }
     if (type === 'out') {
@@ -89,8 +90,8 @@ export default function Anchor(props: AnchorProps) {
         <Rect
           x={x}
           y={y}
-          width={8}
-          height={20}
+          width={IN_ANCHOR_SIZE.width}
+          height={IN_ANCHOR_SIZE.height}
           rx={0}
           ry={0}
           fill={colors.normal}
@@ -102,7 +103,7 @@ export default function Anchor(props: AnchorProps) {
         <Circle
           cx={cx}
           cy={cy}
-          r={9}
+          r={OUT_ANCHOR_SIZE.radius}
           fill={colors.normal}
           strokeWidth={0}
         />
