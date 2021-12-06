@@ -1,5 +1,5 @@
 .anchor {
-  &:hover {
-    cursor: crosshair;
+  &:hover > * {
+    fill: rgb(255, 109, 90);
   }
 }

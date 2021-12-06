@@ -60,6 +60,7 @@ export default function Anchor(props: AnchorProps) {
           rx={0}
           ry={0}
           fill={colors.normal}
+          strokeWidth={0}
         />
       }
       {
@@ -69,6 +70,7 @@ export default function Anchor(props: AnchorProps) {
           cy={cy}
           r={9}
           fill={colors.normal}
+          strokeWidth={0}
         />
       }
     </g>
