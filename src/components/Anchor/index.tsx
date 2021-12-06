@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 import Rect from 'src/components/shapes/Rect';
 import Circle from 'src/components/shapes/Circle';
+import Line from 'src/components/shapes/Line';
 import useDrag from 'src/hooks/useDrag';
 
 import styles from './styles.module.scss';
@@ -20,7 +21,7 @@ const colors = {
 
 export default function Anchor(props: AnchorProps) {
   // props
-  const { type, x, y, cx, cy, nodePosition } = props;
+  const { type, x, y, cx, cy } = props;
   // custom hook
   const {
     mouseDown,
@@ -31,25 +32,23 @@ export default function Anchor(props: AnchorProps) {
   } = useDrag();
   // cached states
   const startCoordinate = useMemo(() => {
-    const translateX = nodePosition?.x || 0;
-    const translateY = nodePosition?.y || 0;
     if (type === 'in') {
       return {
-        x: translateX + (x || 0),
-        y: translateY + (y || 0)
+        x: typeof x === 'number' ? x + 4 : 0,
+        y: typeof y === 'number' ? y + 10 : 0,
       }
     }
     if (type === 'out') {
       return {
-        x: translateX + (cx || 0),
-        y: translateY + (cy || 0)
+        x: cx || 0,
+        y: cy || 0
       }
     }
     return {
       x: 0,
       y: 0
     }
-  }, [type, x, y, cx, cy, nodePosition]);
+  }, [type, x, y, cx, cy]);
 
   const endCoordinate = useMemo(() => {
     return {
@@ -58,9 +57,11 @@ export default function Anchor(props: AnchorProps) {
     }
   }, [startCoordinate, mouseDeltaPosition]);
 
-  useEffect(() => {
-    console.log('endCoordinate', endCoordinate);
-  }, [endCoordinate]);
+  const showLinkLine = useMemo(() => {
+    const x = endCoordinate.x - startCoordinate.x;
+    const y = endCoordinate.y - startCoordinate.y;
+    return Math.pow(Math.abs(x), 2) + Math.pow(Math.abs(y), 2) > 100;
+  }, [startCoordinate, endCoordinate]);
 
   // mouse actions
   const selfHandleMouseUp = useCallback((e) => {
@@ -105,6 +106,15 @@ export default function Anchor(props: AnchorProps) {
           r={9}
           fill={colors.normal}
           strokeWidth={0}
+        />
+      }
+      {
+        showLinkLine &&
+        <Line
+          x1={startCoordinate.x}
+          y1={startCoordinate.y}
+          x2={endCoordinate.x}
+          y2={endCoordinate.y}
         />
       }
     </g>
