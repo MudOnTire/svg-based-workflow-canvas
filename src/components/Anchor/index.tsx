@@ -1,3 +1,4 @@
+import { useCallback, useMemo, MutableRefObject, useEffect } from 'react';
 import Rect from 'src/components/shapes/Rect';
 import Circle from 'src/components/shapes/Circle';
 
@@ -9,6 +10,7 @@ type AnchorProps = {
   y?: number,
   cx?: number,
   cy?: number,
+  nodePosition?: { x: number, y: number },
 }
 
 const colors = {
@@ -17,10 +19,37 @@ const colors = {
 
 export default function Anchor(props: AnchorProps) {
   // props
-  const { type, x, y, cx, cy } = props;
+  const { type, x, y, cx, cy, nodePosition } = props;
+
+  // cached states
+  const coordinates = useMemo(() => {
+    const translateX = nodePosition?.x || 0;
+    const translateY = nodePosition?.y || 0;
+    if (type === 'in') {
+      return {
+        x: translateX + (x || 0),
+        y: translateY + (y || 0)
+      }
+    }
+    if (type === 'out') {
+      return {
+        x: translateX + (cx || 0),
+        y: translateY + (cy || 0)
+      }
+    }
+  }, [type, x, y, cx, cy, nodePosition]);
+
+  useEffect(() => {
+    console.log("coordinates", coordinates);
+  }, [coordinates]);
+
+  // actions
+  const handleMouseDown = useCallback((e) => {
+    e.stopPropagation();
+  }, []);
 
   return (
-    <g className={styles.anchor}>
+    <g className={styles.anchor} onMouseDown={handleMouseDown}>
       {
         type === 'in' &&
         <Rect

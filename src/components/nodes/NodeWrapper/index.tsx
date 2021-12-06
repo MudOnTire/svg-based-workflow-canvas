@@ -1,15 +1,16 @@
-import { useState, useCallback, useMemo, useEffect, ReactNode, createRef, useRef } from 'react'
+import { useState, useCallback, useMemo, useEffect, ReactNode, useRef } from 'react'
 
 import styles from './styles.module.scss';
 
 type NodeWrapperProps = {
-  children: ReactNode
+  children: ReactNode,
+  onNodeMove?: (x: number, y: number) => void
 }
 
-export default function NodeWrapper(props: NodeWrapperProps) {
+function NodeWrapper(props: NodeWrapperProps) {
   // pros
-  const { children } = props;
-  // refs
+  const { children, onNodeMove } = props;
+  // ref
   const node = useRef(null);
 
   // states
@@ -60,7 +61,7 @@ export default function NodeWrapper(props: NodeWrapperProps) {
   }, [mouseDown]);
 
   const handleMouseUp = useCallback(() => {
-    if (!node.current) return;
+    if (!node?.current) return;
     // lastest nodePosition states won't be fetched, use data-x instead
     const nodeEl = node.current as HTMLElement;
     const lastNodeX = nodeEl.dataset.x ? parseInt(nodeEl.dataset.x) : 0;
@@ -83,6 +84,13 @@ export default function NodeWrapper(props: NodeWrapperProps) {
     }
   }, [mouseDown]);
 
+  useEffect(() => {
+    const { x, y } = nodePosition;
+    if (typeof onNodeMove === 'function') {
+      onNodeMove(x, y);
+    }
+  }, [nodePosition.x, nodePosition.y]);
+
   return (
     <g
       ref={node}
@@ -98,3 +106,5 @@ export default function NodeWrapper(props: NodeWrapperProps) {
     </g>
   )
 }
+
+export default NodeWrapper;
