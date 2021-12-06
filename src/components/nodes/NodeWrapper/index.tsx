@@ -37,6 +37,7 @@ export default function NodeWrapper(props: NodeWrapperProps) {
 
   // mouse actions
   const handleMouseDown = useCallback((e) => {
+    e.stopPropagation();
     setMouseDown(true);
     const { clientX, clientY } = e;
     setMouseStartPosition({

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { TransformValues } from 'src/store/types';
 
 import styles from './styles.module.scss';
@@ -11,8 +11,15 @@ type TransformerProps = {
 export default function Transformer(props: TransformerProps) {
   // props
   const { children, transform } = props;
+  // cached states
+  const transformStr = useMemo(() => {
+    const { scaleX, scaleY, skewX, skewY, translateX, translateY } = transform;
+    const matrix = [scaleX, skewY, skewX, scaleY, translateX, translateY].join(',');
+    return `matrix(${matrix})`;
+  }, [transform]);
+
   return (
-    <g className={styles.transformer}>
+    <g className={styles.transformer} transform={transformStr}>
       {children}
     </g>
   )
