@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useMemo, useState, useEffect } from 'react';
+import { ReactNode, useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import RectNode from 'src/components/nodes/RectNode';
 import CircleNode from 'src/components/nodes/CircleNode';
 import Transformer from 'src/components/Transformer';
@@ -12,7 +12,9 @@ export type CanvasOptions = {
 
 export default function Canvas(props: CanvasOptions) {
   // props
-  const { children } = props
+  const { children } = props;
+  // refs
+  const svgRef = useRef(null);
   // states
   const [mouseDown, setMouseDown] = useState(false);
   const [mouseStartPosition, setMouseStartPosition] = useState({ x: 0, y: 0 });
@@ -47,11 +49,12 @@ export default function Canvas(props: CanvasOptions) {
 
   // actions
   const handleMouseDown = useCallback((e) => {
+    if(e.target !== svgRef.current) return;
     const { clientX, clientY } = e;
     setMouseDown(true);
     setMouseStartPosition({ x: clientX, y: clientY });
     setMousePosition({ x: clientX, y: clientY });
-  }, []);
+  }, [svgRef]);
 
   const handleMouseMove = useCallback((e) => {
     if (!mouseDown) return;
@@ -79,7 +82,7 @@ export default function Canvas(props: CanvasOptions) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <svg width="100%" height="100%">
+      <svg width="100%" height="100%" ref={svgRef}>
         <Transformer transform={transform}>
           {children}
           <RectNode />
