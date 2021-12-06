@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'react';
-import { context, actions } from "src/store";
-import { ContextValue, Node } from 'src/store/types'
+import { useContext } from 'react';
+import { context } from "src/store";
+import { Node } from 'src/store/types'
 import RectNode from 'src/components/Nodes/RectNode';
 import CircleNode from 'src/components/Nodes/CircleNode';
 

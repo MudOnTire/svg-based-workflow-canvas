@@ -45,7 +45,16 @@ function reducer(state: State, action: Action) {
     }
     case actions.UPDATE_NODE: {
       const { id } = payload;
-      // const node = state?.nodes?.find
+      let index = state.nodes.findIndex(n => n.id === id);
+      if (index < 0) return state;
+      let node = state.nodes[index];
+      node = { ...node, ...payload };
+      const updatedNodes = [...state.nodes];
+      updatedNodes.splice(index, 1, node);
+      return {
+        ...state,
+        nodes: updatedNodes
+      }
     }
     default:
       return;

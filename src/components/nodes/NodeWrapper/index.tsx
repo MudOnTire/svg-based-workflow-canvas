@@ -14,9 +14,10 @@ type NodeWrapperProps = {
 
 function NodeWrapper(props: NodeWrapperProps) {
   // pros
-  const { children, x, y } = props;
+  const { children, id, x, y } = props;
   // store
   const state = useContext(context);
+  const { dispatch } = state;
   // ref
   const node = useRef(null);
   // custom hooks
@@ -64,6 +65,14 @@ function NodeWrapper(props: NodeWrapperProps) {
 
   useEffect(() => {
     const { x, y } = nodePosition;
+    dispatch({
+      type: actions.UPDATE_NODE,
+      payload: {
+        id,
+        x,
+        y
+      }
+    });
   }, [nodePosition.x, nodePosition.y]);
 
   return (
