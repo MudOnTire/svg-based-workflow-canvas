@@ -24,6 +24,7 @@ interface NodesState {
 }
 
 interface CanvasState {
+  transform: TransformValues,
   pendingEdge: { from: string | null, to: string | null } | null
 }
 

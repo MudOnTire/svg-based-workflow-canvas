@@ -32,7 +32,8 @@ export default function Canvas(props: CanvasOptions) {
   } = useDrag();
 
   // states
-  const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 })
+  const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 });
+  const [scale, setScale] = useState(1);
   // cahce states
   const translate = useMemo(() => {
     return {
@@ -44,14 +45,14 @@ export default function Canvas(props: CanvasOptions) {
   const transform = useMemo<TransformValues>(() => {
     const { x, y } = translate;
     return {
-      scaleX: 1,
-      scaleY: 1,
+      scaleX: scale,
+      scaleY: scale,
       skewX: 0,
       skewY: 0,
       translateX: x,
       translateY: y
     }
-  }, [translate]);
+  }, [translate, scale]);
 
   // effects
   useEffect(() => {
@@ -60,6 +61,13 @@ export default function Canvas(props: CanvasOptions) {
     }
   }, [mouseDown]);
 
+  useEffect(() => {
+    dispatch({
+      type: actions.CANVAS_STORE_SET_TRANSFORM,
+      payload: transform
+    })
+  }, [transform]);
+
   // actions
   const handleDrop = useCallback((e) => {
     const { clientX, clientY } = e;
@@ -67,7 +75,7 @@ export default function Canvas(props: CanvasOptions) {
     try {
       const { nodeType } = JSON.parse(data);
       if (!nodeType) return;
-      const position = roundGridPosition(clientX - translate.x, clientY - translate.y);
+      const position = roundGridPosition((clientX - translate.x) / scale, (clientY - translate.y) / scale);
       dispatch({
         type: actions.NODES_STORE_ADD_NODE,
         payload: {
@@ -85,6 +93,13 @@ export default function Canvas(props: CanvasOptions) {
     e.preventDefault();
   }, []);
 
+  const handleWheel = useCallback((e) => {
+    const { deltaY } = e;
+    setScale(old => {
+      return (old * 100 + (deltaY > 0 ? 10 : -10)) / 100;
+    });
+  }, []);
+
   return (
     <div
       className={`${styles.canvas} ${mouseDown ? styles.mouseDown : ''}`}
@@ -94,6 +109,7 @@ export default function Canvas(props: CanvasOptions) {
       onMouseLeave={(e) => { setMouseDown(false) }}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
+      onWheel={handleWheel}
     >
       <svg width="100%" height="100%" ref={svgRef}>
         <Transformer transform={transform}>
