@@ -2,7 +2,7 @@ import { useCallback, useMemo, useEffect } from 'react';
 import Rect from 'src/components/shapes/Rect';
 import Circle from 'src/components/shapes/Circle';
 import Line from 'src/components/shapes/Line';
-import useDrag from 'src/hooks/useDrag';
+import { useDrag } from 'src/hooks';
 import { IN_ANCHOR_SIZE, OUT_ANCHOR_SIZE } from 'src/utils/constants';
 
 import styles from './styles.module.scss';

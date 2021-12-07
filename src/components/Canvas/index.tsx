@@ -1,7 +1,7 @@
 import { ReactNode, useMemo, useState, useEffect, useRef } from 'react';
 import Transformer from 'src/components/Transformer';
 import { TransformValues } from 'src/store/types';
-import useDrag from 'src/hooks/useDrag';
+import { useDrag } from 'src/hooks';
 import Nodes from 'src/components/Nodes';
 import Edges from 'src/components/Edges';
 

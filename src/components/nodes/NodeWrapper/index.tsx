@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect, ReactNode, useRef, useContext } from 'react'
-import useDrag from 'src/hooks/useDrag';
+import { useDrag } from 'src/hooks';
 import { context, actions } from "src/store";
 import { roundGridPosition } from 'src/utils/ui';
 

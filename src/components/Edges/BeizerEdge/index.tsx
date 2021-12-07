@@ -3,7 +3,7 @@ import { useEdgeNodes } from 'src/hooks';
 
 import { BaseEdgeProps } from '../BaseEdge';
 
-export default function LineEdge(props: BaseEdgeProps) {
+export default function BezierEdge(props: BaseEdgeProps) {
   // props
   const { from, to } = props;
   const { fromNode, toNode, startPoint, endPoint } = useEdgeNodes(from, to);
