@@ -96,7 +96,7 @@ export default function Canvas(props: CanvasOptions) {
   const handleWheel = useCallback((e) => {
     const { deltaY } = e;
     setScale(old => {
-      const newScale = old + (deltaY < 0 ? 0.05 : -0.05);
+      const newScale = old + (deltaY < 0 ? 0.1 : -0.1);
       if (newScale < 0.1) return old;
       return Number(newScale.toFixed(2));
     });
