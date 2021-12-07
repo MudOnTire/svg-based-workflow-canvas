@@ -17,7 +17,7 @@ function NodeWrapper(props: NodeWrapperProps) {
   const { children, id, x, y } = props;
   // store
   const state = useContext(context);
-  const { dispatch } = state;
+  const { dispatch, transform } = state;
   // ref
   const node = useRef(null);
   // custom hooks
@@ -33,10 +33,14 @@ function NodeWrapper(props: NodeWrapperProps) {
   const [nodeLastPosition, setNodeLastPosition] = useState({ x, y });
 
   // cached states
+  const scale = useMemo(() => {
+    return transform.scaleX;
+  }, [transform]);
+
   const nodePosition = useMemo(() => {
     return {
-      x: (nodeLastPosition?.x || 0) + mouseDeltaPosition.x,
-      y: (nodeLastPosition?.y || 0) + mouseDeltaPosition.y
+      x: (nodeLastPosition?.x || 0) + mouseDeltaPosition.x / scale,
+      y: (nodeLastPosition?.y || 0) + mouseDeltaPosition.y / scale
     }
   }, [nodeLastPosition, mouseDeltaPosition]);
 

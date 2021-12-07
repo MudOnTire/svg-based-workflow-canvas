@@ -22,7 +22,7 @@ export default function Anchor(props: AnchorProps) {
   const { type, x, y, cx, cy, nodeId } = props;
   // store
   const state = useContext(context);
-  const { dispatch, pendingEdge } = state;
+  const { dispatch, pendingEdge, transform } = state;
   // custom hook
   const {
     mouseDown,
@@ -32,6 +32,10 @@ export default function Anchor(props: AnchorProps) {
     handleMouseUp
   } = useDrag();
   // cached states
+  const scale = useMemo(() => {
+    return transform.scaleX;
+  }, [transform]);
+
   const startCoordinate = useMemo(() => {
     if (type === 'in') {
       return {
@@ -53,8 +57,8 @@ export default function Anchor(props: AnchorProps) {
 
   const endCoordinate = useMemo(() => {
     return {
-      x: startCoordinate.x + mouseDeltaPosition.x,
-      y: startCoordinate.y + mouseDeltaPosition.y,
+      x: startCoordinate.x + (mouseDeltaPosition.x / scale),
+      y: startCoordinate.y + (mouseDeltaPosition.y / scale),
     }
   }, [startCoordinate, mouseDeltaPosition]);
 
