@@ -51,10 +51,12 @@ function actionName(name: string) {
 
 const SET_NODES = actionName('SET_NODES');
 const UPDATE_NODE = actionName('UPDATE_NODE');
+const ADD_NODE = actionName('ADD_NODE');
 
 const actions = {
   SET_NODES,
-  UPDATE_NODE
+  UPDATE_NODE,
+  ADD_NODE
 }
 
 function reducer(state: State, action: Action) {
@@ -71,6 +73,20 @@ function reducer(state: State, action: Action) {
       node = { ...node, ...payload };
       const updatedNodes = [...state.nodes];
       updatedNodes.splice(index, 1, node);
+      return {
+        ...state,
+        nodes: updatedNodes
+      }
+    }
+    case actions.ADD_NODE: {
+      const { type, x, y } = payload;
+      const newNode = {
+        id: state.nodes.length + 1,
+        x,
+        y,
+        type
+      }
+      const updatedNodes = [...state.nodes, newNode];
       return {
         ...state,
         nodes: updatedNodes
