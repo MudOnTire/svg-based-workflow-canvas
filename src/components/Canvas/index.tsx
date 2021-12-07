@@ -65,7 +65,7 @@ export default function Canvas(props: CanvasOptions) {
     const data = e.dataTransfer.getData('text');
     try {
       const { nodeType } = JSON.parse(data);
-      console.log('drop', nodeType);
+      if (!nodeType) return;
       dispatch({
         type: actions.NODES_STORE_ADD_NODE,
         payload: {
@@ -74,8 +74,8 @@ export default function Canvas(props: CanvasOptions) {
           y: clientY
         }
       })
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   }, []);
 

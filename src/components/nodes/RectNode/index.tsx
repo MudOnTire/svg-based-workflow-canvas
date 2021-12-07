@@ -17,11 +17,13 @@ export default function RectNode(props: BaseNodeProps) {
       />
       <Anchor
         type="in"
+        nodeId={id}
         x={-IN_ANCHOR_SIZE.width / 2}
         y={(RECT_NODE_SIZE.height - IN_ANCHOR_SIZE.height) / 2}
       />
       <Anchor
         type="out"
+        nodeId={id}
         cx={RECT_NODE_SIZE.width}
         cy={RECT_NODE_SIZE.height / 2}
       />

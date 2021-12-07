@@ -1,27 +1,24 @@
 import { useCallback, useMemo, useEffect } from 'react';
-import Rect from 'src/components/shapes/Rect';
-import Circle from 'src/components/shapes/Circle';
 import Line from 'src/components/shapes/Line';
 import { useDrag } from 'src/hooks';
-import { IN_ANCHOR_SIZE, OUT_ANCHOR_SIZE } from 'src/utils/constants';
+import { IN_ANCHOR_SIZE } from 'src/utils/constants';
+import In from './In';
+import Out from './Out';
 
 import styles from './styles.module.scss';
 
 type AnchorProps = {
   type: 'in' | 'out';
+  nodeId: string;
   x?: number;
   y?: number;
   cx?: number;
   cy?: number;
 }
 
-const colors = {
-  normal: '#666'
-}
-
 export default function Anchor(props: AnchorProps) {
   // props
-  const { type, x, y, cx, cy } = props;
+  const { type, x, y, cx, cy, nodeId } = props;
   // custom hook
   const {
     mouseDown,
@@ -86,27 +83,10 @@ export default function Anchor(props: AnchorProps) {
       onMouseDown={handleMouseDown}
     >
       {
-        type === 'in' &&
-        <Rect
-          x={x}
-          y={y}
-          width={IN_ANCHOR_SIZE.width}
-          height={IN_ANCHOR_SIZE.height}
-          rx={0}
-          ry={0}
-          fill={colors.normal}
-          strokeWidth={0}
-        />
+        type === 'in' && <In x={x} y={y} nodeId={nodeId} />
       }
       {
-        type === 'out' &&
-        <Circle
-          cx={cx}
-          cy={cy}
-          r={OUT_ANCHOR_SIZE.radius}
-          fill={colors.normal}
-          strokeWidth={0}
-        />
+        type === 'out' && <Out cx={cx} cy={cy} nodeId={nodeId} />
       }
       {
         showLinkLine &&
