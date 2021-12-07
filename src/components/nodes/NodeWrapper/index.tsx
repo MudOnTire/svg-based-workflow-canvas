@@ -67,7 +67,7 @@ function NodeWrapper(props: NodeWrapperProps) {
   useEffect(() => {
     const { x, y } = nodePosition;
     dispatch({
-      type: actions.UPDATE_NODE,
+      type: actions.NODES_STORE_UPDATE_NODE,
       payload: {
         id,
         x,

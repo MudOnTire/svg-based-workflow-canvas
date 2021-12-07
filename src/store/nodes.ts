@@ -45,27 +45,23 @@ function getInitialState() {
   }
 }
 
-function actionName(name: string) {
-  return `NODES_STORE_${name}`;
-}
-
-const SET_NODES = actionName('SET_NODES');
-const UPDATE_NODE = actionName('UPDATE_NODE');
-const ADD_NODE = actionName('ADD_NODE');
+const SET_NODES = `NODES_STORE_SET_NODES`;
+const UPDATE_NODE = `NODES_STORE_UPDATE_NODE`;
+const ADD_NODE = `NODES_STORE_ADD_NODE`;
 
 const actions = {
-  SET_NODES,
-  UPDATE_NODE,
-  ADD_NODE
+  [SET_NODES]: SET_NODES,
+  [UPDATE_NODE]: UPDATE_NODE,
+  [ADD_NODE]: ADD_NODE
 }
 
 function reducer(state: State, action: Action) {
   const { type, payload } = action;
   switch (type) {
-    case actions.SET_NODES: {
+    case SET_NODES: {
       return { ...state, nodes: payload }
     }
-    case actions.UPDATE_NODE: {
+    case UPDATE_NODE: {
       const { id } = payload;
       let index = state.nodes.findIndex(n => n.id === id);
       if (index < 0) return state;
@@ -78,7 +74,7 @@ function reducer(state: State, action: Action) {
         nodes: updatedNodes
       }
     }
-    case actions.ADD_NODE: {
+    case ADD_NODE: {
       const { type, x, y } = payload;
       const newNode = {
         id: state.nodes.length + 1,

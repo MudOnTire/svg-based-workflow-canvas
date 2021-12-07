@@ -1,9 +1,10 @@
-import { ReactNode, useMemo, useState, useEffect, useRef, useCallback } from 'react';
+import { ReactNode, useMemo, useState, useEffect, useRef, useCallback, useContext } from 'react';
 import Transformer from 'src/components/Transformer';
 import { TransformValues } from 'src/store/types';
 import { useDrag } from 'src/hooks';
 import Nodes from 'src/components/Nodes';
 import Edges from 'src/components/Edges';
+import { context, actions } from "src/store";
 
 import styles from './styles.module.scss';
 
@@ -14,6 +15,9 @@ export type CanvasOptions = {
 export default function Canvas(props: CanvasOptions) {
   // props
   const { children } = props;
+  // store
+  const state = useContext(context);
+  const { dispatch } = state;
   // refs
   const svgRef = useRef(null);
   // custom hooks
@@ -57,10 +61,19 @@ export default function Canvas(props: CanvasOptions) {
   // actions
   const handleDrop = useCallback((e) => {
     console.log('drop', e);
+    const { clientX, clientY } = e;
     const data = e.dataTransfer.getData('text');
     try {
       const { nodeType } = JSON.parse(data);
       console.log('drop', nodeType);
+      dispatch({
+        type: actions.NODES_STORE_ADD_NODE,
+        payload: {
+          type: nodeType,
+          x: clientX,
+          y: clientY
+        }
+      })
     } catch (e) {
       console.log(e);
     }
