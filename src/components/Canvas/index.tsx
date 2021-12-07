@@ -5,6 +5,7 @@ import { useDrag } from 'src/hooks';
 import Nodes from 'src/components/Nodes';
 import Edges from 'src/components/Edges';
 import { context, actions } from "src/store";
+import { roundGridPosition } from 'src/utils/ui';
 
 import styles from './styles.module.scss';
 
@@ -60,24 +61,24 @@ export default function Canvas(props: CanvasOptions) {
 
   // actions
   const handleDrop = useCallback((e) => {
-    console.log('drop', e);
     const { clientX, clientY } = e;
     const data = e.dataTransfer.getData('text');
     try {
       const { nodeType } = JSON.parse(data);
       if (!nodeType) return;
+      const position = roundGridPosition(clientX - translate.x, clientY - translate.y);
       dispatch({
         type: actions.NODES_STORE_ADD_NODE,
         payload: {
           type: nodeType,
-          x: clientX,
-          y: clientY
+          x: position.x,
+          y: position.y
         }
       })
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [translate]);
 
   const handleDragOver = useCallback((e) => {
     e.preventDefault();
