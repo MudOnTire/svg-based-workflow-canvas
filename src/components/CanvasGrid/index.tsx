@@ -1,5 +1,5 @@
 import { useMemo, ReactNode } from 'react';
-import { CANVAS_GRID_PATTERN_ID } from 'src/utils/constants';
+import { CANVAS_GRID_PATTERN_ID, CANVAS_GRID_SIZE } from 'src/utils/constants';
 import styles from './styles.module.scss';
 
 export type CanvasGridOptions = {
@@ -59,7 +59,7 @@ export default function CanvasGrid(props: CanvasGridOptions) {
 }
 
 CanvasGrid.defaultProps = {
-  size: 20,
+  size: CANVAS_GRID_SIZE,
   thickness: 2,
   visible: true,
   type: 'dot',

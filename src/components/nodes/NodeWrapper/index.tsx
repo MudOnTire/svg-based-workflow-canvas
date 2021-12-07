@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect, ReactNode, useRef, useContext } from 'react'
 import useDrag from 'src/hooks/useDrag';
 import { context, actions } from "src/store";
-import { ContextValue } from 'src/store/types'
+import { roundGridPosition } from 'src/utils/ui';
 
 import styles from './styles.module.scss';
 
@@ -48,7 +48,8 @@ function NodeWrapper(props: NodeWrapperProps) {
     const nodeEl = node.current as HTMLElement;
     const lastNodeX = nodeEl.dataset.x ? parseInt(nodeEl.dataset.x) : 0;
     const lastNodeY = nodeEl.dataset.y ? parseInt(nodeEl.dataset.y) : 0;
-    setNodeLastPosition({ x: lastNodeX, y: lastNodeY });
+    const { x, y } = roundGridPosition(lastNodeX, lastNodeY);
+    setNodeLastPosition({ x, y });
   }, [nodePosition]);
 
   // effects

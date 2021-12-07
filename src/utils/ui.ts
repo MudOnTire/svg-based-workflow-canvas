@@ -2,7 +2,8 @@ import {
   RECT_NODE_SIZE,
   CIRCLE_NODE_SIZE,
   IN_ANCHOR_SIZE,
-  OUT_ANCHOR_SIZE
+  OUT_ANCHOR_SIZE,
+  CANVAS_GRID_SIZE
 } from 'src/utils/constants';
 
 function getAnchorCoordinates(props: {
@@ -43,4 +44,13 @@ function getAnchorCoordinates(props: {
   return { x: nodeX, y: nodeY }
 }
 
-export { getAnchorCoordinates }
+function roundGridPosition(x: number, y: number) {
+  let result = { x, y };
+  const xReminder = x % CANVAS_GRID_SIZE;
+  const yReminder = y % CANVAS_GRID_SIZE;
+  result.x = xReminder > CANVAS_GRID_SIZE / 2 ? x - xReminder + CANVAS_GRID_SIZE : x - xReminder;
+  result.y = yReminder > CANVAS_GRID_SIZE / 2 ? y - yReminder + CANVAS_GRID_SIZE : y - yReminder;
+  return result;
+}
+
+export { getAnchorCoordinates, roundGridPosition }
