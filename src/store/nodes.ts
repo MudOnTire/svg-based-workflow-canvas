@@ -29,18 +29,18 @@ function getInitialState() {
       // },
     ],
     edges: [
-      {
-        from: '0',
-        to: '1'
-      },
-      {
-        from: '1',
-        to: '2'
-      },
-      {
-        from: '1',
-        to: '3'
-      },
+      // {
+      //   from: '0',
+      //   to: '1'
+      // },
+      // {
+      //   from: '1',
+      //   to: '2'
+      // },
+      // {
+      //   from: '1',
+      //   to: '3'
+      // },
     ]
   }
 }
@@ -48,11 +48,13 @@ function getInitialState() {
 const SET_NODES = `NODES_STORE_SET_NODES`;
 const UPDATE_NODE = `NODES_STORE_UPDATE_NODE`;
 const ADD_NODE = `NODES_STORE_ADD_NODE`;
+const ADD_EDGE = `NODES_STORE_ADD_EDGE`;
 
 const actions = {
   [SET_NODES]: SET_NODES,
   [UPDATE_NODE]: UPDATE_NODE,
-  [ADD_NODE]: ADD_NODE
+  [ADD_NODE]: ADD_NODE,
+  [ADD_EDGE]: ADD_EDGE
 }
 
 function reducer(state: State, action: Action) {
@@ -77,7 +79,7 @@ function reducer(state: State, action: Action) {
     case ADD_NODE: {
       const { type, x, y } = payload;
       const newNode = {
-        id: state.nodes.length + 1,
+        id: `${state.nodes.length + 1}`,
         x,
         y,
         type
@@ -86,6 +88,17 @@ function reducer(state: State, action: Action) {
       return {
         ...state,
         nodes: updatedNodes
+      }
+    }
+    case ADD_EDGE: {
+      const { from, to } = payload;
+      if (!from || !to) return state;
+      const existed = state.edges.find(e => e.from === from && e.to === to);
+      if (existed) return state;
+      const updatedEdges = [...state.edges, payload];
+      return {
+        ...state,
+        edges: updatedEdges
       }
     }
     default:

@@ -1,35 +1,26 @@
-import { Action } from './types';
+import { Action, State } from './types';
 
 function getInitialState() {
   return {
-    transform: {
-      scaleX: 0,
-      scaleY: 0,
-      skewX: 0,
-      skewY: 0,
-      translateX: 0,
-      translateY: 0
-    }
+    pendingEdge: null
   }
 }
 
-function actionName(name: string) {
-  return `CANVAS_STORE_${name}`;
-}
-
-const SET_TRANSFORM = actionName('SET_TRANSFORM')
+const SET_PENDING_EDGE = `CANVAS_STORE_SET_PENDING_EDGE`;
 
 const actions = {
-  SET_TRANSFORM
+  [SET_PENDING_EDGE]: SET_PENDING_EDGE,
 }
 
-function reducer(state: Object, action: Action) {
+function reducer(state: State, action: Action) {
   const { type, payload } = action;
   switch (type) {
-    case actions.SET_TRANSFORM: {
-      return { ...state, transform: payload }
+    case SET_PENDING_EDGE: {
+      return { ...state, pendingEdge: payload }
     }
     default:
-      return
+      return;
   }
 }
+
+export { getInitialState, actions, reducer };

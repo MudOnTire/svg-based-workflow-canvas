@@ -23,7 +23,11 @@ interface NodesState {
   edges: Edge[];
 }
 
-interface State extends NodesState {
+interface CanvasState {
+  pendingEdge: { from: string | null, to: string | null } | null
+}
+
+interface State extends NodesState, CanvasState {
   dispatch: Function
 }
 

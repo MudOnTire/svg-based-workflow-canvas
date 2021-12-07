@@ -1,9 +1,10 @@
-import { useCallback, useMemo, useEffect } from 'react';
+import { useCallback, useMemo, useEffect, useContext } from 'react';
 import Line from 'src/components/shapes/Line';
 import { useDrag } from 'src/hooks';
 import { IN_ANCHOR_SIZE } from 'src/utils/constants';
 import In from './In';
 import Out from './Out';
+import { context, actions } from "src/store";
 
 import styles from './styles.module.scss';
 
@@ -19,6 +20,9 @@ type AnchorProps = {
 export default function Anchor(props: AnchorProps) {
   // props
   const { type, x, y, cx, cy, nodeId } = props;
+  // store
+  const state = useContext(context);
+  const { dispatch, pendingEdge } = state;
   // custom hook
   const {
     mouseDown,
@@ -65,6 +69,32 @@ export default function Anchor(props: AnchorProps) {
     handleMouseUp(e);
   }, []);
 
+  const handleAnchorMouseUp = useCallback((e) => {
+    if (type === 'in' && pendingEdge?.from && pendingEdge?.from !== nodeId) {
+      dispatch({
+        type: actions.NODES_STORE_ADD_EDGE,
+        payload: {
+          from: pendingEdge.from,
+          to: nodeId
+        }
+      });
+    }
+    if (type === 'out' && pendingEdge?.to && pendingEdge.to !== nodeId) {
+      dispatch({
+        type: actions.NODES_STORE_ADD_EDGE,
+        payload: {
+          from: nodeId,
+          to: pendingEdge.to
+        }
+      });
+    }
+    dispatch({
+      type: actions.CANVAS_STORE_SET_PENDING_EDGE,
+      payload: null
+    });
+
+  }, [type, pendingEdge]);
+
   // effects
   useEffect(() => {
     if (mouseDown) {
@@ -77,10 +107,25 @@ export default function Anchor(props: AnchorProps) {
     }
   }, [mouseDown]);
 
+  useEffect(() => {
+    const payload = showLinkLine ?
+      {
+        from: type === 'out' ? nodeId : null,
+        to: type === 'in' ? nodeId : null,
+      }
+      :
+      null;
+    dispatch({
+      type: actions.CANVAS_STORE_SET_PENDING_EDGE,
+      payload
+    });
+  }, [showLinkLine]);
+
   return (
     <g
       className={styles.anchor}
       onMouseDown={handleMouseDown}
+      onMouseUp={handleAnchorMouseUp}
     >
       {
         type === 'in' && <In x={x} y={y} nodeId={nodeId} />
