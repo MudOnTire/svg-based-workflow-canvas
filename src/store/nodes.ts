@@ -3,30 +3,30 @@ import { Action, State } from './types';
 function getInitialState() {
   return {
     nodes: [
-      {
-        id: '0',
-        type: 'circle',
-        x: 220,
-        y: 340
-      },
-      {
-        id: '1',
-        type: 'rect',
-        x: 400,
-        y: 300
-      },
-      {
-        id: '2',
-        type: 'circle',
-        x: 680,
-        y: 220
-      },
-      {
-        id: '3',
-        type: 'circle',
-        x: 680,
-        y: 460
-      },
+      // {
+      //   id: '0',
+      //   type: 'circle',
+      //   x: 220,
+      //   y: 340
+      // },
+      // {
+      //   id: '1',
+      //   type: 'rect',
+      //   x: 400,
+      //   y: 300
+      // },
+      // {
+      //   id: '2',
+      //   type: 'circle',
+      //   x: 680,
+      //   y: 220
+      // },
+      // {
+      //   id: '3',
+      //   type: 'circle',
+      //   x: 680,
+      //   y: 460
+      // },
     ],
     edges: [
       {

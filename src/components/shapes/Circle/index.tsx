@@ -1,6 +1,6 @@
 type CricleProps = {
-  cx?: number;
-  cy?: number;
+  cx?: number | string;
+  cy?: number | string;
   r?: number;
   fill?: string;
   stroke?: string;

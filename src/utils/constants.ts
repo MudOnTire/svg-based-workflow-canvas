@@ -11,6 +11,8 @@ const CIRCLE_NODE_SIZE = {
   radius: 45
 }
 
+const NODE_STROKE_WIDTH = 2;
+
 const IN_ANCHOR_SIZE = {
   width: 8,
   height: 20
@@ -26,5 +28,6 @@ export {
   RECT_NODE_SIZE,
   CIRCLE_NODE_SIZE,
   IN_ANCHOR_SIZE,
-  OUT_ANCHOR_SIZE
+  OUT_ANCHOR_SIZE,
+  NODE_STROKE_WIDTH
 };

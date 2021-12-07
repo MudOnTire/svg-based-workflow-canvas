@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { context } from "src/store";
-import LineEdge from './LineEdge';
-import BezierEdge from './BeizerEdge';
+import BezierEdge from './BezierEdge';
 
 type Edge = {
   from: string;

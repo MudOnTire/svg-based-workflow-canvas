@@ -2,7 +2,7 @@ import NodeWrapper from '../NodeWrapper';
 import Circle from 'src/components/shapes/Circle';
 import Anchor from 'src/components/Anchor';
 import { BaseNodeProps } from '../BaseNode';
-import { CIRCLE_NODE_SIZE, IN_ANCHOR_SIZE } from 'src/utils/constants';
+import { CIRCLE_NODE_SIZE, IN_ANCHOR_SIZE, NODE_STROKE_WIDTH } from 'src/utils/constants';
 
 export default function CircleNode(props: BaseNodeProps) {
   // props
@@ -10,7 +10,7 @@ export default function CircleNode(props: BaseNodeProps) {
 
   return (
     <NodeWrapper x={x} y={y} id={id}>
-      <Circle r={CIRCLE_NODE_SIZE.radius} />
+      <Circle r={CIRCLE_NODE_SIZE.radius} strokeWidth={NODE_STROKE_WIDTH} />
       <Anchor
         type="in"
         x={-CIRCLE_NODE_SIZE.radius - IN_ANCHOR_SIZE.width / 2}

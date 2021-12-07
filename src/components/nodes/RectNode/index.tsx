@@ -2,7 +2,7 @@ import NodeWrapper from '../NodeWrapper';
 import Rect from 'src/components/shapes/Rect';
 import Anchor from 'src/components/Anchor';
 import { BaseNodeProps } from '../BaseNode';
-import { RECT_NODE_SIZE, IN_ANCHOR_SIZE } from 'src/utils/constants';
+import { RECT_NODE_SIZE, IN_ANCHOR_SIZE, NODE_STROKE_WIDTH } from 'src/utils/constants';
 
 export default function RectNode(props: BaseNodeProps) {
   // props
@@ -10,7 +10,11 @@ export default function RectNode(props: BaseNodeProps) {
 
   return (
     <NodeWrapper x={x} y={y} id={id}>
-      <Rect width={RECT_NODE_SIZE.width} height={RECT_NODE_SIZE.height} />
+      <Rect
+        width={RECT_NODE_SIZE.width}
+        height={RECT_NODE_SIZE.height}
+        strokeWidth={NODE_STROKE_WIDTH}
+      />
       <Anchor
         type="in"
         x={-IN_ANCHOR_SIZE.width / 2}
