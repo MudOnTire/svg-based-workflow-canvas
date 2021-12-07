@@ -16,7 +16,7 @@ export default function Linkers() {
       {
         Array.isArray(state?.edges) && state.edges.map((edge: Edge) => {
           const { from, to } = edge;
-          return <LineEdge from={from} to={to} />
+          return <LineEdge key={`${from}_${to}`} from={from} to={to} />
         })
       }
     </>

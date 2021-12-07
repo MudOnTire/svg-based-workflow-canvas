@@ -18,14 +18,14 @@ function getInitialState() {
       {
         id: '2',
         type: 'circle',
-        x: 600,
-        y: 300
+        x: 680,
+        y: 220
       },
       {
         id: '3',
         type: 'circle',
-        x: 600,
-        y: 600
+        x: 680,
+        y: 460
       },
     ],
     edges: [
