@@ -62,6 +62,7 @@ function useDrag() {
 
   return {
     mouseDown,
+    setMouseDown,
     mouseDeltaPosition,
     handleMouseDown,
     handleMouseMove,

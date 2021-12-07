@@ -24,6 +24,7 @@ export default function Canvas(props: CanvasOptions) {
   // custom hooks
   const {
     mouseDown,
+    setMouseDown,
     mouseDeltaPosition,
     handleMouseDown,
     handleMouseMove,
@@ -90,6 +91,7 @@ export default function Canvas(props: CanvasOptions) {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onMouseLeave={(e) => { setMouseDown(false) }}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
