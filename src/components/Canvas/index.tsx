@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState, useEffect, useRef } from 'react';
+import { ReactNode, useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import Transformer from 'src/components/Transformer';
 import { TransformValues } from 'src/store/types';
 import { useDrag } from 'src/hooks';
@@ -54,12 +54,30 @@ export default function Canvas(props: CanvasOptions) {
     }
   }, [mouseDown]);
 
+  // actions
+  const handleDrop = useCallback((e) => {
+    console.log('drop', e);
+    const data = e.dataTransfer.getData('text');
+    try {
+      const { nodeType } = JSON.parse(data);
+      console.log('drop', nodeType);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  const handleDragOver = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
   return (
     <div
       className={`${styles.canvas} ${mouseDown ? styles.mouseDown : ''}`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
     >
       <svg width="100%" height="100%" ref={svgRef}>
         <Transformer transform={transform}>
