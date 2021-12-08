@@ -1,5 +1,19 @@
-.nodeWrapper{
+.nodeWrapper {
   cursor: grab;
+
+  :global {
+    .node-actions {
+      display: none;
+    }
+  }
+
+  &:hover {
+    :global {
+      .node-actions {
+        display: initial;
+      }
+    }
+  }
 }
 
 .mouseDown {

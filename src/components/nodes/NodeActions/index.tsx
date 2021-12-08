@@ -1,3 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import ActionButton from './ActionButton';
+
 import styles from './styles.module.scss';
 
 type NodeActionsProps = {
@@ -11,9 +15,11 @@ export default function NodeActions(props: NodeActionsProps) {
   // props
   const { x, y, width, height } = props;
   return (
-    <foreignObject x={x} y={y} width={width} height={height}>
+    <foreignObject x={x} y={y} width={width} height={height} className='node-actions'>
       <div className={styles.actions}>
-        delete
+        <ActionButton>
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </ActionButton>
       </div>
     </foreignObject>
   )
