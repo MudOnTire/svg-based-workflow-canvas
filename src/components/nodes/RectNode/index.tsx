@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import NodeWrapper from '../NodeWrapper';
 import Rect from 'src/components/shapes/Rect';
 import Anchor from 'src/components/Anchor';
@@ -7,7 +6,6 @@ import { RECT_NODE_SIZE, IN_ANCHOR_SIZE, NODE_STROKE_WIDTH } from 'src/utils/con
 import NodeActions from 'src/components/Nodes/NodeActions';
 
 export default function RectNode(props: BaseNodeProps) {
-  const [hover, setHover] = useState(false);
   // props
   const { id, x, y } = props;
 
@@ -18,6 +16,7 @@ export default function RectNode(props: BaseNodeProps) {
         y={-30}
         width={RECT_NODE_SIZE.width}
         height={30}
+        nodeId={id}
       />
       <Rect
         width={RECT_NODE_SIZE.width}
