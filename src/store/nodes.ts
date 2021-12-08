@@ -99,9 +99,11 @@ function reducer(state: State, action: Action) {
       if (index < 0) return state;
       const updatedNodes = [...state.nodes];
       updatedNodes.splice(index, 1)
+      const updatedEdges = state.edges.filter(e => e.from !== id && e.to !== id);
       return {
         ...state,
-        nodes: updatedNodes
+        nodes: updatedNodes,
+        edges: updatedEdges
       }
     }
     // edges
