@@ -35,12 +35,20 @@ export default function Canvas(props: CanvasOptions) {
   const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 });
   const [scale, setScale] = useState(1);
   // cahce states
+  const scrollOffsetTranslate = useMemo(() => {
+    return {
+      x: window.innerWidth / 2 * (1 - scale),
+      y: window.innerHeight / 2 * (1 - scale)
+    }
+  }, [scale]);
+
   const translate = useMemo(() => {
     return {
-      x: lastTranslate.x + mouseDeltaPosition.x,
-      y: lastTranslate.y + mouseDeltaPosition.y
+      x: lastTranslate.x + mouseDeltaPosition.x + scrollOffsetTranslate.x,
+      y: lastTranslate.y + mouseDeltaPosition.y + scrollOffsetTranslate.y
     }
-  }, [lastTranslate, mouseDeltaPosition]);
+  }, [lastTranslate, mouseDeltaPosition, scrollOffsetTranslate]);
+
 
   const transform = useMemo<TransformValues>(() => {
     const { x, y } = translate;
@@ -57,7 +65,7 @@ export default function Canvas(props: CanvasOptions) {
   // effects
   useEffect(() => {
     if (!mouseDown) {
-      setLastTranslate({ x: translate.x, y: translate.y });
+      setLastTranslate({ x: translate.x - scrollOffsetTranslate.x, y: translate.y - scrollOffsetTranslate.y });
     }
   }, [mouseDown]);
 
@@ -87,13 +95,15 @@ export default function Canvas(props: CanvasOptions) {
     } catch (err) {
       console.log(err);
     }
-  }, [translate]);
+  }, [translate, scale]);
 
   const handleDragOver = useCallback((e) => {
     e.preventDefault();
   }, []);
 
   const handleWheel = useCallback((e) => {
+    e.stopPropagation();
+    e.preventDefault();
     const { deltaY } = e;
     setScale(old => {
       const newScale = old + (deltaY < 0 ? 0.1 : -0.1);
