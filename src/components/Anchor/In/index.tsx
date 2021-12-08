@@ -20,7 +20,8 @@ export default function In(props: InProps) {
       rx={0}
       ry={0}
       fill={ANCHOR_FILL}
-      strokeWidth={0}
+      strokeWidth={10}
+      stroke='transparent'
     />
   )
 }
