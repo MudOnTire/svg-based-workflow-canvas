@@ -82,7 +82,7 @@ function reducer(state: State, action: Action) {
     case ADD_NODE: {
       const { type, x, y } = payload;
       const newNode = {
-        id: `${state.nodes.length + 1}`,
+        id: `${new Date().valueOf()}`,
         x,
         y,
         type
