@@ -18,7 +18,7 @@ export default function Canvas(props: CanvasOptions) {
   const { children } = props;
   // store
   const state = useContext(context);
-  const { dispatch } = state;
+  const { dispatch, nodes, edges } = state;
   // refs
   const svgRef = useRef(null);
   // custom hooks
@@ -122,6 +122,10 @@ export default function Canvas(props: CanvasOptions) {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onWheel={handleWheel}
+      onDoubleClick={() => {
+        const config = { nodes, edges };
+        console.log(JSON.stringify(config));
+      }}
     >
       <svg width="100%" height="100%" ref={svgRef}>
         <Transformer transform={transform}>

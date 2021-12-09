@@ -10,7 +10,7 @@ export default function BezierEdge(props: BaseEdgeProps) {
   const { fromNode, toNode, startPoint, endPoint } = useEdgeNodes(from, to);
   const path = useMemo(() => {
     const dx = endPoint.x - startPoint.x;
-    const stepX = Math.round(dx / 3);
+    const stepX = Math.round(dx / 4);
     return `M ${startPoint.x} ${startPoint.y} C ${endPoint.x - stepX} ${startPoint.y}, ${startPoint.x + stepX} ${endPoint.y}, ${endPoint.x} ${endPoint.y}`;
   }, [startPoint, endPoint]);
 
