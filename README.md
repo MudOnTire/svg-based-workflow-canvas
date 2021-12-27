@@ -2,4 +2,4 @@
 
 [Online Demo](https://mudontire.github.io/svg-based-workflow-canvas/)
 
-![demo](./demo/workflow.png)
+![demo](./screenshot/workflow.png)
